@@ -11,7 +11,7 @@ services:
       - 80:80
       - 443:443
     networks:
-      - container-link
+      - shared
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - proxy:/usr/share/nginx/html
@@ -19,7 +19,7 @@ services:
       - ./docker/encrypt/certs:/etc/nginx/certs:ro
     restart: always
     labels:
-      com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true
+      com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
   letsencrypt-nginx:
     image: jrcs/letsencrypt-nginx-proxy-companion
     container_name: letsencrypt-nginx
@@ -27,7 +27,7 @@ services:
     environment:
       - NGINX_PROXY_CONTAINER=nginx-proxy
     networks:
-      - container-link
+      - shared
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - proxy:/etc/nginx/vhost.d
@@ -41,8 +41,8 @@ networks:
   default:
     external:
       name: bridge
-  container-link:
-    name: container_network
+  shared:
+    name: shared
 
 volumes:
   proxy:

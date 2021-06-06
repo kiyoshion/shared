@@ -10,7 +10,7 @@
 アプリを追加するには、アプリ側のdoker-compose.ymlを修正します。
 
 1. Add networks
-2. Add encironment
+2. Add environment
 
 ex: wordpress
 
